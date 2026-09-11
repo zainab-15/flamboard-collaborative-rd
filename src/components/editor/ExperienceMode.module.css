@@ -1,0 +1,209 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: rgba(26, 15, 8, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  pointer-events: all;
+  animation: fadeIn var(--t-enter) var(--ease-out);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ivory);
+  background: var(--accent);
+  padding: 4px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.hint {
+  font-size: 12px;
+  color: rgba(250,246,240,0.5);
+}
+
+.deviceSelector {
+  display: flex;
+  background: rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  gap: 2px;
+}
+
+.deviceBtn {
+  padding: 5px 12px;
+  border: none;
+  border-radius: calc(var(--radius-md) - 2px);
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(250,246,240,0.5);
+  cursor: pointer;
+  transition: all var(--t-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.deviceBtn:hover {
+  color: var(--ivory);
+  background: rgba(255,255,255,0.08);
+}
+
+.deviceBtnActive {
+  background: rgba(255,255,255,0.15) !important;
+  color: var(--ivory) !important;
+}
+
+.backBtn {
+  padding: 6px 16px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 99px;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ivory);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  white-space: nowrap;
+}
+
+.backBtn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* Device Frame Viewport */
+.viewportContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.deviceBezel {
+  position: relative;
+  border: 2.5px solid rgba(199, 123, 90, 0.45);
+  box-shadow: 0 0 0 9999px rgba(26, 15, 8, 0.35), 0 25px 60px rgba(0, 0, 0, 0.45);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deviceBezel.desktop {
+  width: min(92%, 1060px);
+  height: min(84%, 620px);
+  border-radius: 12px;
+}
+
+.deviceBezel.tablet {
+  width: min(72%, 640px);
+  height: min(88%, 760px);
+  border-radius: 24px;
+}
+
+.deviceBezel.mobile {
+  width: min(86%, 360px);
+  height: min(90%, 720px);
+  border-radius: 36px;
+}
+
+.bezelHeader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 14px;
+}
+
+.notch {
+  width: 90px;
+  height: 18px;
+  background: rgba(26, 15, 8, 0.85);
+  border-radius: 0 0 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: none;
+}
+
+.cameraDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.desktopBar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(26, 15, 8, 0.65);
+  padding: 6px 10px;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.windowDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.browserAddress {
+  font-size: 11px;
+  color: rgba(250, 246, 240, 0.5);
+  font-family: var(--font-sans);
+  margin-left: 12px;
+}
+
+.frameLabel {
+  font-size: 10px;
+  font-family: var(--font-sans);
+  color: rgba(250, 246, 240, 0.4);
+  background: rgba(26, 15, 8, 0.6);
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-bottom: 8px;
+}
+
+.deviceInfo {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(250,246,240,0.6);
+  background: rgba(26,15,8,0.75);
+  padding: 4px 14px;
+  border-radius: 99px;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}

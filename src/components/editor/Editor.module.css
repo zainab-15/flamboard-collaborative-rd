@@ -1,0 +1,40 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--ivory);
+  transition: background var(--t-enter) var(--ease-out);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.canvasArea {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  /* Dot grid via CSS */
+  background-color: #F7F0E8;
+  background-image: radial-gradient(var(--canvas-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Experience mode */
+.experienceMode {
+  background: var(--espresso);
+}
+
+.experienceMode .canvasArea {
+  background: var(--espresso);
+}
+
+@media (max-width: 768px) {
+  .body {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,107 @@
+.controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 6px 12px;
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  animation: fadeIn var(--t-enter) var(--ease-out);
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.group + .group::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 20px;
+  background: var(--border-subtle);
+  margin-right: 6px;
+  margin-left: -4px;
+}
+
+.btn {
+  height: 32px;
+  min-width: 32px;
+  padding: 0 10px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease-out),
+    color var(--t-fast) var(--ease-out),
+    transform var(--t-fast) var(--ease-spring);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  background: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.btn:active { transform: scale(0.94); }
+
+.btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.zoomLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 52px;
+}
+
+.previewBtn {
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 16px;
+  border-radius: var(--radius-full);
+  gap: 6px;
+}
+
+.previewBtn:hover {
+  background: var(--accent-hover);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(199, 123, 90, 0.3);
+  transform: translateY(-1px);
+}
+
+.backBtn {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 0 16px;
+}
+
+@media (max-width: 600px) {
+  .controls {
+    bottom: 12px;
+    width: calc(100% - 24px);
+    left: 12px;
+    transform: none;
+    border-radius: var(--radius-xl);
+    justify-content: space-between;
+  }
+}

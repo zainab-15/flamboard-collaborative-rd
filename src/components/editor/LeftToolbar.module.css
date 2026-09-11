@@ -1,0 +1,227 @@
+.toolbar {
+  width: 60px;
+  background: var(--surface-raised);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+  gap: 4px;
+  overflow: visible;
+  flex-shrink: 0;
+  z-index: 50;
+  animation: slideInLeft var(--t-slow) var(--ease-out);
+}
+
+.tools {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  align-items: center;
+}
+
+/* Tooltip wrapper */
+.tooltipWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.tooltipWrap:hover {
+  z-index: 100;
+}
+
+.tooltip {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--espresso);
+  color: var(--ivory);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(26, 15, 8, 0.25);
+}
+
+.tooltipWrap:hover .tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(2px);
+}
+
+/* Tool button */
+.toolBtn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background var(--t-fast) var(--ease-out),
+    color var(--t-fast) var(--ease-out),
+    transform var(--t-fast) var(--ease-spring);
+  color: var(--text-muted);
+  position: relative;
+}
+
+.toolBtn:hover {
+  background: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.toolBtnActive {
+  background: var(--blush) !important;
+  color: var(--accent) !important;
+}
+
+.toolBtnActive::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  background: var(--accent);
+  border-radius: 0 3px 3px 0;
+}
+
+.toolIcon {
+  font-size: 18px;
+  line-height: 1;
+  font-style: normal;
+}
+
+.kbd {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  background: rgba(255,255,255,0.1);
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: var(--warm-gray-light);
+}
+
+/* Divider */
+.divider {
+  width: 32px;
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 4px 0;
+  flex-shrink: 0;
+}
+
+/* Sections */
+.section {
+  width: 100%;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sectionLabel {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+/* Color grid */
+.colorGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.colorSwatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition:
+    transform var(--t-fast) var(--ease-spring),
+    border-color var(--t-fast);
+}
+
+.colorSwatch:hover { transform: scale(1.15); }
+.colorSwatchActive {
+  border-color: var(--accent) !important;
+  transform: scale(1.1);
+  box-shadow: 0 0 0 1px var(--surface-raised);
+}
+
+/* Width */
+.widthRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.widthBtn {
+  width: 36px;
+  height: 28px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--border-subtle);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition:
+    background var(--t-fast),
+    border-color var(--t-fast);
+}
+
+.widthBtn:hover { background: var(--beige); }
+.widthBtnActive {
+  border-color: var(--accent);
+  background: var(--blush);
+  color: var(--accent);
+}
+
+/* AI hint */
+.aiHint {
+  font-size: 9px;
+  color: var(--text-faint);
+  text-align: center;
+  padding: 0 6px;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+}
+
+.aiStar {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    width: 52px;
+  }
+  .toolBtn {
+    width: 40px;
+    height: 40px;
+  }
+}
