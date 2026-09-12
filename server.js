@@ -4,10 +4,10 @@ const next = require('next');
 const { Server } = require('socket.io');
 
 const dev = process.env.NODE_ENV !== 'production';
-const hostname = process.env.HOSTNAME || '0.0.0.0';
 const port = parseInt(process.env.PORT || '3000', 10);
+const host = '0.0.0.0';
 
-const app = next({ dev, hostname, port });
+const app = next({ dev, hostname: host, port });
 const handle = app.getRequestHandler();
 
 // ── In-memory room state ──────────────────────────────────────────────────────
@@ -68,6 +68,13 @@ function seedDemoRoom() {
 // ── App ───────────────────────────────────────────────────────────────────────
 app.prepare().then(() => {
   const httpServer = createServer((req, res) => {
+    // Instant health check for Render / load balancers
+    if (req.url === '/healthz' || req.url === '/health') {
+      res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('OK');
+      return;
+    }
+
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
   });
@@ -211,8 +218,8 @@ app.prepare().then(() => {
     });
   });
 
-  httpServer.listen(port, hostname, () => {
-    console.log(`\n🔥 FLAMBOARD  http://localhost:${port}`);
+  httpServer.listen(port, host, () => {
+    console.log(`\n🔥 FLAMBOARD listening on ${host}:${port}`);
     console.log(`   Socket.IO  ready`);
     console.log(`   Demo room  /board/demo\n`);
   });

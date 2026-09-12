@@ -7,14 +7,27 @@ let socket: Socket | null = null;
 export function getSocket(): Socket {
   if (!socket) {
     const envUrl = process.env.NEXT_PUBLIC_SOCKET_URL?.trim();
-    // Resolve target URL:
-    // 1. Explicit env var if set (e.g. deployed separate backend)
-    // 2. In browser: window.location.origin (e.g. "http://localhost:3000")
-    // 3. Fallback to undefined for socket.io default resolution
-    // CRITICAL: NEVER pass an empty string '' to io()! In socket.io-client,
-    // passing '' causes the internal parser to construct 'http://:80',
-    // which fails to connect and leaves the client stuck in "Disconnected".
-    const url = envUrl || (typeof window !== 'undefined' ? window.location.origin : undefined);
+
+    // Determine target URL:
+    // In production on Render (or any public domain), always connect to same-origin (window.location.origin).
+    // Never allow a localhost URL to be used when running on a public hostname.
+    let url: string | undefined = undefined;
+
+    if (typeof window !== 'undefined') {
+      const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (envUrl && envUrl.length > 0) {
+        // If an explicit envUrl is provided, only allow it if it's not pointing to localhost on a remote domain
+        if (isLocalHost || !envUrl.includes('localhost')) {
+          url = envUrl;
+        } else {
+          url = window.location.origin;
+        }
+      } else {
+        url = window.location.origin;
+      }
+    } else {
+      url = envUrl || undefined;
+    }
 
     socket = io(url as string | undefined, {
       transports: ['websocket', 'polling'],
